@@ -1,0 +1,29 @@
+ARG coshapp_ver
+FROM debian:${coshapp_ver:-10.5}
+label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
+
+RUN apt-get update
+RUN apt-get install -y mate
+RUN apt-get install -y pulseaudio
+RUN apt-get install -y sudo
+RUN apt-get install -y locales locales-all
+RUN apt-get install -y curl gpg
+
+RUN apt-get clean all
+
+RUN useradd -m duser
+USER duser
+WORKDIR /home/duser
+RUN curl -L https://archive.mozilla.org/pub/firefox/releases/80.0.1/KEY | gpg --import -
+RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/80.0.1/linux-x86_64/en-US/firefox-80.0.1.tar.bz2.asc > firefox-80.0.1.tar.bz2.asc
+RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/80.0.1/linux-x86_64/en-US/firefox-80.0.1.tar.bz2 > firefox-80.0.1.tar.bz2
+RUN gpg --verify firefox-80.0.1.tar.bz2.asc
+RUN tar xjf firefox-80.0.1.tar.bz2
+ENV PATH=/home/duser/firefox:$PATH
+
+#FROM scratch 
+#COPY --from=downloader /firefox/* /usr/local/bin/
+#COPY --from=downloader /etc/passwd /etc/passwd
+#COPY --from=downloader /etc/nsswitch.conf /etc/nsswitch.conf
+#COPY --from=downloader /etc/resolv.conf /etc/resolv.conf
+CMD /bin/sh

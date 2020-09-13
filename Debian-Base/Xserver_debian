@@ -1,0 +1,15 @@
+ARG coshapp_ver
+FROM debian:${coshapp_ver:-10.5}
+label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
+
+RUN apt-get update
+RUN apt-get install -y sudo
+RUN apt-get install -y locales locales-all
+RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji
+RUN apt-get install -y xorg
+RUN apt-get install -y twm xterm
+RUN apt-get clean all
+RUN useradd -m duser
+USER duser
+WORKDIR /home/duser
+CMD /bin/sh

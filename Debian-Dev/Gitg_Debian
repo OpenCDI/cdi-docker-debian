@@ -1,0 +1,16 @@
+ARG coshapp_ver
+FROM debian:${coshapp_ver:-10.5}
+label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
+
+RUN apt-get update
+RUN apt-get install -y mate
+RUN apt-get install -y pulseaudio
+RUN apt-get install -y sudo
+RUN apt-get install -y locales locales-all
+RUN apt-get install -y curl
+RUN apt-get install -y firefox-esr 
+RUN apt-get install -y gitg meld
+
+RUN apt-get clean all
+RUN useradd -m duser
+CMD /bin/sh

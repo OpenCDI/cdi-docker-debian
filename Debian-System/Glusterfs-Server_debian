@@ -1,0 +1,8 @@
+ARG coshapp_ver
+FROM debian:${coshapp_ver:-10.5}
+label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
+
+RUN apt-get update
+RUN apt-get install -y glusterfs-server
+RUN apt-get clean all
+CMD /bin/sh

@@ -1,0 +1,11 @@
+ARG coshapp_ver
+FROM debian:${coshapp_ver:-10.5}
+label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
+
+RUN apt-get update
+RUN apt-get install -y tcpdump squid squidguard 
+RUN apt-get install -y prometheus-squid-exporter
+RUN apt-get clean all
+RUN sed -r -i s/localhost/localnet/g /etc/squid/squid.conf
+RUN echo "acl prometheus src exporter.cosh\nhttp_access allow manager prometheus" | tee -a /etc/squid/squid.conf
+CMD /bin/sh

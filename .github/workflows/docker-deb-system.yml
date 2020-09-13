@@ -1,0 +1,30 @@
+name: debian-sys
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+
+env:
+  LOGIN_NAME: coshapp
+
+jobs:
+
+  # Push image to DockerHub.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKERHUB_SECRET }}" | docker login --username ${LOGIN_NAME:-coshapp} --password-stdin
+
+      - name: Build and push Debian System images
+        run: |
+          . workflow_functions.sh
+          build_image Debian-System/*
