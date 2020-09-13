@@ -7,7 +7,7 @@ on:
       - master
 
 env:
-  LOGIN_NAME: coshapp
+  LOGIN_NAME: okadash
 
 jobs:
 
