@@ -13,4 +13,5 @@ RUN apt-get install -y docker.io
 RUN apt-get clean all
 RUN useradd -m duser
 RUN usermod -aG docker duser
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo
 CMD /bin/sh

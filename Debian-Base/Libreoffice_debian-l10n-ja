@@ -13,4 +13,5 @@ RUN apt-get install -y libreoffice-gtk3 libreoffice-l10n-ja
 RUN apt-get install -y libreoffice libreoffice-writer libreoffice-draw libreoffice-calc libreoffice-impress libreoffice-base
 RUN apt-get clean all
 RUN useradd -m duser
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo
 CMD /bin/sh

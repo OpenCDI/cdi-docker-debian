@@ -10,4 +10,5 @@ RUN apt-get install -y locales locales-all
 RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji
 RUN apt-get clean all
 RUN useradd -m duser
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo
 CMD /bin/sh
