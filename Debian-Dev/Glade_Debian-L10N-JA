@@ -1,5 +1,5 @@
 ARG coshapp_ver
-FROM debian:${coshapp_ver:-10.5}
+FROM debian:${coshapp_ver:-10.7}
 label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
 
 RUN apt-get update

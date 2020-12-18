@@ -1,5 +1,5 @@
 ARG coshapp_ver
-FROM debian:${coshapp_ver:-10.5}
+FROM debian:${coshapp_ver:-10.7}
 label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
 
 RUN apt-get update
@@ -15,11 +15,11 @@ RUN apt-get clean all
 RUN useradd -m duser
 USER duser
 WORKDIR /home/duser
-RUN curl -L https://archive.mozilla.org/pub/firefox/releases/82.0.3/KEY | gpg --import -
-RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/82.0.3/linux-x86_64/ja/firefox-82.0.3.tar.bz2.asc > firefox-82.0.3.tar.bz2.asc
-RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/82.0.3/linux-x86_64/ja/firefox-82.0.3.tar.bz2 > firefox-82.0.3.tar.bz2
-RUN gpg --verify firefox-82.0.3.tar.bz2.asc
-RUN tar xjf firefox-82.0.3.tar.bz2
+RUN curl -L https://archive.mozilla.org/pub/firefox/releases/84.0/KEY | gpg --import -
+RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/84.0/linux-x86_64/ja/firefox-84.0.tar.bz2.asc > firefox-84.0.tar.bz2.asc
+RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/84.0/linux-x86_64/ja/firefox-84.0.tar.bz2 > firefox-84.0.tar.bz2
+RUN gpg --verify firefox-84.0.tar.bz2.asc
+RUN tar xjf firefox-84.0.tar.bz2
 ENV PATH=/home/duser/firefox:$PATH
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo
 
