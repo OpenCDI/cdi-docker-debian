@@ -1,0 +1,28 @@
+name: debian-dev
+
+on:
+  schedule:
+    - cron: '5 20 * * 6'
+
+env:
+  LOGIN_NAME: coshapp
+
+jobs:
+
+  # Push image to DockerHub.
+  # See also https://docs.docker.com/docker-hub/builds/
+  rolling-push:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKERHUB_SECRET }}" | docker login --username okadash --password-stdin
+
+      - name: Build and push Debian Dev images
+        run: |
+          . workflow_functions.sh
+          build_image Debian-Dev/*
+
