@@ -3,6 +3,8 @@ FROM debian:${coshapp_ver:-10.7}
 label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
 
 RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
 RUN apt-get install -y mate
 RUN apt-get install -y pulseaudio
 RUN apt-get install -y sudo
@@ -21,6 +23,6 @@ RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/84.0/linux-x86_64/
 RUN gpg --verify firefox-84.0.tar.bz2.asc
 RUN tar xjf firefox-84.0.tar.bz2
 ENV PATH=/home/duser/firefox:$PATH
-RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo
+RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 CMD /bin/sh

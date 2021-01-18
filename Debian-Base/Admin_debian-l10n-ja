@@ -3,6 +3,8 @@ FROM debian:${coshapp_ver:-10.7}
 label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
 
 RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
 RUN apt-get install -y mate
 RUN apt-get install -y pulseaudio
 RUN apt-get install -y sudo
@@ -10,9 +12,29 @@ RUN apt-get install -y locales locales-all
 RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji
 RUN apt-get install -y ibus ibus-mozc
 RUN apt-get install -y git curl jq
+RUN apt-get install -y uidmap
 RUN apt-get install -y docker.io
 RUN apt-get clean all
 RUN useradd -m duser
 RUN usermod -aG docker duser
-RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo
+RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+USER duser
+
+RUN docker help version || exit 1
+
+RUN mkdir -p /home/duser/local/shef
+WORKDIR /home/duser/local/shef
+RUN git config --global user.name saru
+RUN git config --global user.email saru@localhost
+
+RUN git clone https://github.com/okadash/shef /home/duser/local/shef
+WORKDIR /home/duser/local/shef
+RUN ./install.sh || cp -av bin/shef /home/duser/.shef/bin 
+ENV PATH=/home/duser/.shef/bin:$PATH
+
+ENV EDITOR=/usr/bin/vim
+RUN shef install https://github.com/okadash/cosh
+RUN shef install https://github.com/okadash/nik-transitional
+
 CMD /bin/sh

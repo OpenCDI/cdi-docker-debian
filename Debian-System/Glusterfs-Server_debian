@@ -3,6 +3,8 @@ FROM debian:${coshapp_ver:-10.7}
 label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
 
 RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
 RUN apt-get install -y glusterfs-server
 RUN apt-get clean all
 CMD /bin/sh
