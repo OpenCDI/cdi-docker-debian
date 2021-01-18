@@ -23,6 +23,7 @@ RUN visudo -c
 
 USER duser
 
+ENV SKIP_IPTABLES=1
 RUN curl -sL https://get.docker.com/rootless | sh
 ENV PATH=/home/duser/.shef/bin:$PATH
 ENV XDG_RUNTIME_DIR=/run/user/1000
