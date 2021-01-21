@@ -12,7 +12,7 @@ set_image_name(){
           
 build_image(){ 
   coshapp_ver=`cat ${1%%/*}/version`
-  for coshapp_ver in ${coshapp_ver:-10.5}; do 
+  for coshapp_ver in ${coshapp_ver:-10.7}; do 
     for j in $@; do
       export coshapp_ver;
       set_image_name $j ;
