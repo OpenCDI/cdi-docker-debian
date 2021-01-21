@@ -1,0 +1,16 @@
+ARG coshapp_ver
+FROM debian:${coshapp_ver:-10.7}
+label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
+
+RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
+RUN apt-get install -y mate
+RUN apt-get install -y pulseaudio
+RUN apt-get install -y sudo
+RUN apt-get install -y locales locales-all
+RUN apt-get install -y flatpak
+
+RUN apt-get clean all
+RUN useradd -m duser
+CMD /bin/sh
