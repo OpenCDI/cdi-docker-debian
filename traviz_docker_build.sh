@@ -9,7 +9,7 @@ if [ "${TRAVIS_BRANCH}" = test ]; then
     docker rmi localhost/$app
   done
 else
-  for i in $(ls */*) do
+  for i in $(ls */*); do
     app=$(echo $i | tr A-Z a-z)
     : ${app:?app name not set for $i!}
     [ "$app" = "${app_branch:?app_branch not set!}" ] \
