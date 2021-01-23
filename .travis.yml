@@ -11,4 +11,4 @@ services:
 before-install: 
 - docker pull debian:10.7
 script:
-- ./traviz_docker_build.sh
+- ./travis_docker_build.sh
