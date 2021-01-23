@@ -18,7 +18,7 @@ else
       && {
         # if traviz local cache have any localhost/* image, delete them
         if docker images | grep localhost; then
-          docker rmi $(docker images | grep localhost\/)
+          docker rmi $(docker images | grep localhost\/ | awk '{print $1 ":" $2}')
         fi
         docker build -t "localhost/$app" -f $i .
       }
