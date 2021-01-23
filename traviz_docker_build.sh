@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
-app_branch="${TRAVIZ_BRANCH%%-dev}"
+app_branch="${TRAVIS_BRANCH%%-dev}"
 : ${app_branch:?app_branch not set!};
 
-if [ "${TRAVIZ_BRANCH}" = test ]; then
+if [ "${TRAVIS_BRANCH}" = test ]; then
   for i in */*; do
     docker build -t "localhost/$app" -f $i .
     docker rmi localhost/$app
