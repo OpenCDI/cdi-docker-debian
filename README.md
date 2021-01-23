@@ -22,7 +22,7 @@ You can also make containerized desktop environment, which is more tolerant to s
 | Glusterfs-Server |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=glusterfs-server-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Gnome-builder |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=gnome-builder-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Gnote |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=gnote-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
-| GvncViewer |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=gvncViewer-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
+| GvncViewer |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=gvncviewer-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Inkscape |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=inkscape-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Libreoffice |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=libreoffice-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Openvswitch |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=openvswitch-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
