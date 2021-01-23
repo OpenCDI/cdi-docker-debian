@@ -1,6 +1,7 @@
 #!/bin/sh -ex
 
-app_branch="${TRAVIS_BRANCH%%-dev}"
+app_branch=$(echo $TRAVIS_BRANCH | tr A-Z a-z)
+app_branch="${app_branch%%-dev}"
 : ${app_branch:?app_branch not set!};
 
 case "${TRAVIS_BRANCH}" in
