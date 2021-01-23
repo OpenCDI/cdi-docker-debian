@@ -10,7 +10,6 @@ You can also make containerized desktop environment, which is more tolerant to s
 | Application name | maintainer | Travis status | DockerHub |
 | --- | --- | --- | --- |
 | Admin |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=admin-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
-| Atom |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=atom-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Chromium |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=chromium-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Core |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=core-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Eclipse |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=eclipse-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
