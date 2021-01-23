@@ -6,10 +6,14 @@ branches:
 
 language: sh
 os:
-- linux
+  - linux
 services: 
-- docker
+  - docker
 before-install: 
-- docker pull debian:10.7
+  - docker pull debian:10.7
 script:
-- ./travis_docker_build.sh
+  - ./travis_docker_build.sh
+notifications:
+  slack:
+    rooms:
+    - opencdi:fRj7xoMZXkFdVmlyw7h4J93t#test
