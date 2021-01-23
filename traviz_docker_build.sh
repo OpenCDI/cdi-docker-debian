@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-app_branch="${TRAVIZ_BRANCH##dev-app-}"
+app_branch="${TRAVIZ_BRANCH%%-dev}"
 : ${app_branch:?app_branch not set!};
 
 if [ "${TRAVIZ_BRANCH}" = test ]; then

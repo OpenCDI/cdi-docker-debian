@@ -1,7 +1,7 @@
 branches:
   only:
   - test
-  - /^dev-app-.*$/
+  - /^.*-dev$/
 
 language: sh
 os:
@@ -9,6 +9,6 @@ os:
 services: 
 - docker
 before-install: 
-- docker pull debian-10.7
+- docker pull debian:10.7
 script:
 - ./traviz_docker_build.sh
