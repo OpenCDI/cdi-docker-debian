@@ -20,6 +20,10 @@ case "${TRAVIS_BRANCH}" in
   for i in */*; do
     app=${i%%_*}:${i#*_}
     app=$(echo ${app:?app not set} | tr A-Z a-z)
+    # if traviz local cache have any localhost/* image in other app, delete them
+    if docker images | grep localhost | grep -v $app; then
+      docker rmi $(docker images | grep localhost\/ | awk '{print $1 ":" $2}')
+    fi
     docker build -t "localhost/$app" -f $i .
     docker rmi localhost/$app
   done ;;
@@ -31,10 +35,6 @@ case "${TRAVIS_BRANCH}" in
     : ${app:?app name not set for $i!}
     [ "$app" = "${app_branch:?app_branch not set!}" ] \
       && {
-        # if traviz local cache have any localhost/* image, delete them
-        if docker images | grep localhost; then
-          docker rmi $(docker images | grep localhost\/ | awk '{print $1 ":" $2}')
-        fi
         docker build -t "localhost/$app" -f $i .
       }
     echo "$app" | grep -iE "^${app_branch:?app_branch not set!}-l10n-.*" \
