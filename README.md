@@ -1,7 +1,3 @@
-![debian-base](https://github.com/opencdi/cdi-docker-debian/workflows/debian-base/badge.svg)
-![debian-dev](https://github.com/opencdi/cdi-docker-debian/workflows/debian-dev/badge.svg)
-![debian-sys](https://github.com/opencdi/cdi-docker-debian/workflows/debian-sys/badge.svg)
-
 # ABOUT
 
 Containerized Desktop Infrastructure (CDI) is an extremly light-weight desktop virtualization mechanisms. 

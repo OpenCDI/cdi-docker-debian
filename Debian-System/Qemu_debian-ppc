@@ -1,5 +1,5 @@
 ARG coshapp_ver
-FROM debian:${coshapp_ver:-10.7}
+FROM debian:${coshapp_ver:-10.7}-slim
 label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
 
 RUN apt-get update
@@ -10,7 +10,7 @@ RUN apt-get install -y pulseaudio
 RUN apt-get install -y sudo
 RUN apt-get install -y locales locales-all
 
-RUN apt-get install -y uim-xim uim-mozc
+RUN apt-get install -y qemu-system-ppc
 RUN apt-get clean all
 RUN useradd -m duser
 CMD /bin/sh

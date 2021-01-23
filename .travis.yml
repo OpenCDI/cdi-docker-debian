@@ -1,0 +1,14 @@
+branches:
+  only:
+  - test
+  - /^.*-dev$/
+
+language: sh
+os:
+- linux
+services: 
+- docker
+before-install: 
+- docker pull debian:10.7
+script:
+- ./traviz_docker_build.sh

@@ -9,10 +9,8 @@ RUN apt-get install -y mate
 RUN apt-get install -y pulseaudio
 RUN apt-get install -y sudo
 RUN apt-get install -y locales locales-all
-RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji
-RUN apt-get install -y ibus ibus-mozc
-RUN apt-get install -y tigervnc-standalone-server
+RUN apt-get install -y gvncviewer
+
 RUN apt-get clean all
 RUN useradd -m duser
-RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 CMD /bin/sh
