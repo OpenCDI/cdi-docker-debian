@@ -1,6 +1,6 @@
-ARG coshapp_ver
-FROM debian:${coshapp_ver}
-label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
+ARG COSHAPP_BASE_VERSION
+FROM debian:${COSHAPP_BASE_VERSION}
+label maintainer="Okadarien Saru <okadas@tanban.org>"
 
 RUN apt-get update
 RUN apt-get install -y apt-transport-https ca-certificates openssl

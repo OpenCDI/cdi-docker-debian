@@ -1,6 +1,7 @@
 #!/bin/sh -ex
 
-app_branch="${TRAVIS_BRANCH%%-dev}"
+app_branch=$(echo $TRAVIS_BRANCH | tr A-Z a-z)
+app_branch="${app_branch%%-dev}"
 : ${app_branch:?app_branch not set!};
 
 case "${TRAVIS_BRANCH}" in
@@ -14,6 +15,8 @@ case "${TRAVIS_BRANCH}" in
     app=$(echo ${app:?app not set} | tr A-Z a-z)
     docker build -t "coshapp/$app" -f $i .
     docker push "coshapp/$app"
+    docker tag "coshapp/$app" "coshapp/${app}-${COSHAPP_BASE_VERSION:-10.7}"
+    docker push "coshapp/${app}-${COSHAPP_BASE_VERSION:-10.7}"
   done ;;
 
   test)
