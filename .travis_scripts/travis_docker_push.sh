@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh
 
 app_branch=$(echo $TRAVIS_BRANCH | tr A-Z a-z)
 app_branch="${app_branch%%-dev}"
@@ -17,7 +17,9 @@ case "${TRAVIS_BRANCH}" in
     app=${app#*/}
     docker push "coshapp/$app"
     docker push "coshapp/${app}-${COSHAPP_BASE_VERSION:-10.7}"
-    [ "$app" = "debian" ] && docker push "coshapp/${app%%:*}:latest"
+    [ "${app##*:}" = "debian" ] \
+      && docker push "coshapp/${app%%:*}:latest" \
+      || echo $app push finished
   done ;;
 
   *) return 0 ;;
