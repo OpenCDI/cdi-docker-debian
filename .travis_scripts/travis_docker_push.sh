@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 app_branch=$(echo $TRAVIS_BRANCH | tr A-Z a-z)
 app_branch="${app_branch%%-dev}"
@@ -11,7 +11,7 @@ case "${TRAVIS_BRANCH}" in
       --username "${DOCKER_USERNAME:?DOCKER_USERNAME not set} \
       --password-stdin \
       || { echo Cannot login to DockerHub!; exit 1;}
-  for i in */*; do
+  for i in */Thunder*; do
     app=${i%%_*}:${i#*_}
     app=$(echo ${app:?app not set} | tr A-Z a-z)
     app=${app#*/}
