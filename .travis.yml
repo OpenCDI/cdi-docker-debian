@@ -20,4 +20,6 @@ deploy:
   provider: script
   script: ./.travis_scripts/travis_docker_push.sh
   on:
-    branch: master
+    branches:
+    - master
+    - fix-travis-script
