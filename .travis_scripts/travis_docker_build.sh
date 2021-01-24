@@ -6,10 +6,9 @@ app_branch="${app_branch%%-dev}"
 
 case "${TRAVIS_BRANCH}" in
   master) 
-  echo "${DOCKERHUB_SECRET:?DOCKERHUB_SECRET not set} \
-    | tr -d \\\n \
+  echo "${DOCKER_SECRET:?DOCKER_SECRET not set} \
     | docker login \
-      --username "${DOCKERHUB_USER:?DOCKERHUB_USER not set} \
+      --username "${DOCKER_USER:?DOCKER_USER not set} \
       --password-stdin \
       || { echo Cannot login to DockerHub!; exit 1;}
   for i in */*; do
