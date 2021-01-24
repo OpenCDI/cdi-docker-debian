@@ -30,7 +30,7 @@ You can also make containerized desktop environment, which is more tolerant to s
 | Qemu |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=qemu-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Sylpheed |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=sylpheed-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Thunderbird |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=thunderbird-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
-| Tightvnc-Server |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=tightvnc-Server-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
+| Tightvnc-Server |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=tightvnc-server-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | TrafficProxy |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=trafficproxy-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | TrafficWatcher |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=trafficwatcher-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Wayland |OpenCDI core team | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=wayland-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
