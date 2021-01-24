@@ -7,6 +7,7 @@ app_branch="${app_branch%%-dev}"
 case "${TRAVIS_BRANCH}" in
   master) 
   echo "${DOCKERHUB_SECRET:?DOCKERHUB_SECRET not set} \
+    | tr -d \\\n \
     | docker login \
       --username "${DOCKERHUB_USER:?DOCKERHUB_USER not set} \
       --password-stdin \
