@@ -1,6 +1,6 @@
-ARG coshapp_ver
-FROM debian:${coshapp_ver:-10.7}
-label maintainer="Okadarien Saru <okadas@dev.sysnk.net>"
+ARG COSHAPP_BASE_VERSION
+FROM debian:${COSHAPP_BASE_VERSION:-10.7}
+label maintainer="Okadarien Saru <okadas@tanban.org>"
 
 RUN apt-get update
 RUN apt-get install -y apt-transport-https ca-certificates openssl
@@ -10,9 +10,9 @@ RUN apt-get install -y pulseaudio
 RUN apt-get install -y sudo
 RUN apt-get install -y locales locales-all
 RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji
-RUN apt-get install -y uim-xim uim-mozc
-RUN apt-get install -y flatpak
+RUN apt-get install -y curl
+RUN apt-get install -y firefox-esr firefox-esr-l10n-ja
+RUN apt-get install -y gitg meld
 RUN apt-get clean all
 RUN useradd -m duser
-RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 CMD /bin/sh
