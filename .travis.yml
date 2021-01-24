@@ -1,6 +1,7 @@
 branches:
   only:
   - master
+  - fix-travis-script
   - /^.*-dev$/
 language: sh
 os:
