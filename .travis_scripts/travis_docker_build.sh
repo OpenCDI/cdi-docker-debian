@@ -8,7 +8,7 @@ case "${TRAVIS_BRANCH}" in
   master) 
   echo "${DOCKER_SECRET:?DOCKER_SECRET not set} \
     | docker login \
-      --username "${DOCKER_USER:?DOCKER_USER not set} \
+      --username "${DOCKER_USERNAME:?DOCKER_USERNAME not set} \
       --password-stdin \
       || { echo Cannot login to DockerHub!; exit 1;}
   for i in */*; do
