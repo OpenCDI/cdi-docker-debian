@@ -1,8 +1,8 @@
 branches:
   only:
-  - master
   - fix-travis-script
   - "/^.*-dev$/"
+  - test
 language: sh
 os:
 - linux
@@ -14,11 +14,6 @@ notifications:
   slack:
     rooms:
     - opencdi:fRj7xoMZXkFdVmlyw7h4J93t#test
-deploy:
-  provider: script
-  script: "./.travis_scripts/travis_docker_push.sh" 
-  on:
-    branch: fix-travis-script
 env:
   global:
   - secure: OBibrZf5QJVrap+vWxJX83w0NnETBYuwuoBUa4qZ7NRExOaRQs+dTvhzx7K96qkVIS/SGFFlpl3wB3jyEWdMRnXMpIPv3Ge7YLuj6zyjMs160CuuVVUl08QD3g28WW4pgtieODmupDi0KHHaSQ0/oUygXH523WjqwrVUux/ii/TUqdDyF3CY9UyOBTAJSzMJYnyVQ8gZGc/8PDmqM5eIlCz8BgS/zinT2f/M0fV5nOfSJIH2JYNOQZRoXONBTC+BUG4emEi3QYoQOiZDzKC0awmhpJ6PljAE6esRHMBagvY5dPYols8lxWENwZIuSwOTkJmE4dXCGVwJTNtFOsaiuuAguIy8KNH46/H6xnR9Dfkzhu9klAWxSA1Om81G6XFuwdUI13IP4cnef56YvaPivFUR95H3qloBU8l4vkwDX08iF3/O77VpQeo7k42P/5GwgGlCXZ6WxsINESB2AMD840NlD+tNufz3Ag3UApTs8bUQITUc7elDJuXsBfwempxzyMDQMx9Ax3432EBC3F8vaKeOSNVmLyosrtWZ3X7x4K/G9ksXzHUIlqndLQweIMgVpIigmEz7CDMWRprNKEF6Kr5WggryItkUoUvPlnY6AvnmGbGKuoSAlqGmZI9wURoqyGIafi9BU4s1sFS+/Ho498f0+J3CtgBK2oPuguhJur8=

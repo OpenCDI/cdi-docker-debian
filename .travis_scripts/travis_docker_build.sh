@@ -5,7 +5,7 @@ app_branch="${app_branch%%-dev}"
 : ${app_branch:?app_branch not set!};
 
 case "${TRAVIS_BRANCH}" in
-  master|fix-travis-script) 
+  fix-travis-script) 
   echo "${DOCKER_SECRET:?DOCKER_SECRET not set} \
     | docker login \
       --username "${DOCKER_USERNAME:?DOCKER_USERNAME not set} \
