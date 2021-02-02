@@ -29,5 +29,5 @@ jobs:
         run: |
           . .github_script.sh
           [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && target="$(echo ${GITHUB_REF%-dev} )"
-          TAG_POSTFIX="-test" filtered_build
-          TAG_POSTFIX="-test" filtered_push
+          TAG_POSTFIX="test" filtered_build
+          TAG_POSTFIX="test" filtered_push

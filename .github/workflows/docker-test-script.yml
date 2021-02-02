@@ -32,5 +32,5 @@ jobs:
         run: |
           . .github_script.sh
           TEST_TARGET="thunderbird"
-          TAG_POSTFIX="-test" filtered_build
-          TAG_POSTFIX="-test" filtered_push
+          TAG_POSTFIX="test" filtered_build
+          TAG_POSTFIX="test" filtered_push
