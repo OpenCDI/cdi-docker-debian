@@ -8,8 +8,6 @@ os:
 - linux
 services:
 - docker
-before-install:
-- docker pull debian:10.7
 script:
 - "./.travis_scripts/travis_docker_build.sh"
 notifications:
