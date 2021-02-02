@@ -16,7 +16,7 @@ notifications:
     - opencdi:fRj7xoMZXkFdVmlyw7h4J93t#test
 deploy:
   provider: script
-  script: "./.travis_scripts/travis_docker_push.sh"
+  script: "./.travis_scripts/travis_docker_push.sh" 
   on:
     branch: fix-travis-script
 env:
