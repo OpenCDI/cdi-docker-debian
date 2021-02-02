@@ -53,6 +53,8 @@ filter_image(){
   if [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ]; then
     filter_target="${TEST_TARGET:-${GITHUB_REF%-dev}}"
     echo */* | tr \\\  \\\n | grep -i "${filter_target:?no filter_target!}"
+  elif [ "${GITHUB_REF}" != "${GITHUB_REF%-script}" ]; then
+    echo */* | tr \\\  \\\n | grep -i "${TEST_TARGET:-firefox}"
   else
     echo */*  ## equal to build_all
   fi
