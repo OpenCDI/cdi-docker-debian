@@ -30,3 +30,6 @@ jobs:
           build_image Debian-Base/*
           build_image Debian-Dev/*
           build_image Debian-System/*
+          push_image Debian-Base/*
+          push_image Debian-Dev/*
+          push_image Debian-System/*

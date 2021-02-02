@@ -1,8 +1,14 @@
 name: debian-base
 
 on:
-  schedule:
-    - cron: '3 20 * * 6'
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - fix-ci-script
+      - fix-travis-script
+  pull_request:
+    branches:
+      - master
 
 env:
   LOGIN_NAME: coshapp
@@ -10,9 +16,11 @@ env:
 jobs:
 
   # Push image to DockerHub.
-  rolling-push:
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
 
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
@@ -23,9 +31,6 @@ jobs:
       - name: Build and push Debian Base images
         run: |
           . .github_script.sh
-          build_image Debian-Base/*
-          build_image Debian-Dev/*
-          build_image Debian-System/*
-          push_image Debian-Base/*
-          push_image Debian-Dev/*
-          push_image Debian-System/*
+          TEST_TARGET="thunderbird"
+          TAG_POSTFIX="-test" filtered_build
+          TAG_POSTFIX="-test" filtered_push
