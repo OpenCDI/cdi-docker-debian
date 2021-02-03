@@ -1,4 +1,4 @@
-name: debian-base-crony
+name: build-and-push-weekly
 
 on:
   schedule:

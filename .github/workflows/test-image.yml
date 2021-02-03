@@ -1,10 +1,13 @@
-name: deb-testimg
+name: test-images
 
 on:
   push:
     # Publish `test`, `*-test` branch as *-test image.
     branches:
-      - test
+      - '**-test'
+  pull_request:
+    # Publish `test`, `*-test` branch as *-test image.
+    branches:
       - '**-test'
 
 env:

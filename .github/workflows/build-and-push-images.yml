@@ -1,4 +1,4 @@
-name: debian-base
+name: build-and-push-images
 
 on:
   push:

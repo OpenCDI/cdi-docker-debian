@@ -31,6 +31,6 @@ jobs:
       - name: Build and push Debian Base images
         run: |
           . .github_script.sh
-          TEST_TARGET="thunderbird"
+          set_test_target "thunderbird"
           TAG_POSTFIX="test" filtered_build
           TAG_POSTFIX="test" filtered_push

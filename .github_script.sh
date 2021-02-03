@@ -94,9 +94,10 @@ rmi_without_core(){
 # for *-test branches, TEST_TARGET=*
 # for test branch, TEST_TARET not set
 set_test_target(){
-  [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ] && {
+  TAG_POSTFIX="test" 
+  [ $# -ne 0 ] && TEST_TARGET="$1"
+  [ $# -eq 0 ] && [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ] && {
     TEST_TARGET="${GITHUB_REF%-test}"
     TEST_TARGET="${TEST_TARGET##*/}"
   }
-  TAG_POSTFIX="test" 
 }
