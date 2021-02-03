@@ -5,5 +5,4 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y wireshark-gtk
 
 RUN apt-get clean all
-RUN useradd -m duser
 CMD /bin/sh

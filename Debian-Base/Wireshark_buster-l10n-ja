@@ -4,6 +4,4 @@ FROM coshapp/core:buster-l10n-ja-${COSHAPP_BASE_VERSION:-10.7}
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y wireshark-gtk
 RUN apt-get clean all
-RUN useradd -m duser
-RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 CMD /bin/sh
