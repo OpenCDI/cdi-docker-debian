@@ -14,8 +14,12 @@ is_non_l10n_img(){
   [ "${tag_name#buster}" = "" ] && return 0 || return 1
 }
 
-is_non_test_img(){
-  [ -z "${TEST_TARGET}" ] && return 0 || return 1
+is_non_test_no_core_img(){
+  if [ -z "${TEST_TARGET}" ] || [ "${image_name}" = "core" ]; then
+    return 0
+  else
+    return 1
+  fi
 }
           
 build_image(){ 
@@ -33,7 +37,7 @@ build_image(){
       set_image_name "$j" ;
       docker build --build-arg=coshapp_ver=$coshapp_ver -t ${img_desc:?img not specified} -f "$j" .;
       : ${tag_name:? tag_name not set} 
-      is_non_l10n_img && is_non_test_img && {
+      is_non_l10n_img && is_non_test_no_core_img && {
           docker tag $img_desc ${img_desc%%:*}:latest
       } || echo skipping...
     done
@@ -48,7 +52,7 @@ push_image(){
       set_image_name "$j" ;
       : ${img_desc:?img not specified}
       docker push $img_desc
-      is_non_l10n_img && is_non_test_img && {
+      is_non_l10n_img && is_non_test_no_core_img && {
           docker push ${img_desc%%:*}:latest
       } || echo skipping...
     done
