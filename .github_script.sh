@@ -15,12 +15,12 @@ is_non_l10n_img(){
 }
 
 is_non_test_img(){
-  [ "${TAG_POSTFIX}" = "${TAG_POSTFIX%-test}" ] && return 0 || return 1
+  [ -z "${TEST_TARGET}" ] && return 0 || return 1
 }
           
 build_image(){ 
   set -o xtrace
-  [ -n "$TEST_TARGET" ] && {
+  [ -n "$TEST_TARGET" && "$TEST_TARGET" != "${TEST_TARGET#Core}" ] && {
     docker pull coshapp/core:buster-10.7-test
     docker pull coshapp/core:buster-l10n-ja-10.7-test
     docker tag coshapp/core:buster-10.7-test coshapp/core:buster-10.7
