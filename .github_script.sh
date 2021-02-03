@@ -52,7 +52,7 @@ push_image(){
 filter_image(){
   if [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ]; then
     filter_target="${TEST_TARGET:-${GITHUB_REF%-dev}}"
-    echo */* | tr \\\  \\\n | grep -i "${filter_target:?no filter_target!}"
+    echo */* | tr \\\  \\\n | grep -i "${filter_target##*/}"
   elif [ "${GITHUB_REF}" != "${GITHUB_REF%-script}" ]; then
     echo */* | tr \\\  \\\n | grep -i "${TEST_TARGET:-firefox}"
   else
@@ -60,14 +60,30 @@ filter_image(){
   fi
 }
 
-filtered_build(){
-  build_image $(filter_image)
+# build with branch filtering
+filtered_build(){ build_image $(filter_image); }
+
+# push with branch filtering
+filtered_push(){ push_image $(filter_image); }
+
+# build all images ontshot
+build_all(){ build_image */*; }
+
+push_core(){ push_image Debian-Base/Core_*; }
+
+build_core(){ build_image Debian-Base/Core_*; }
+
+# remove all image without core
+rmi_without_core(){
+  images="$(docker images | grep ${LOGIN_NAME:-coshapp} | awk '{print $1 ":" $2}' | grep -v ${LOGIN_NAME:-coshapp}/core:)"
+  docker rmi $images
 }
 
-filtered_push(){
-  push_image $(filter_image)
-}
-
-build_all(){
-  build_image */*
+# for *-dev branches, TEST_TARGET=*
+# for test branch, TEST_TARET not set
+set_test_target(){
+  [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && {
+    TEST_TARGET="${GITHUB_REF%-dev}"
+    TEST_TARGET="${TEST_TARGET##*/}"
+  }
 }

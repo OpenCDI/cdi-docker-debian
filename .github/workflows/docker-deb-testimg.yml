@@ -14,7 +14,7 @@ jobs:
 
   # Push image to DockerHub.
   # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  push-test-img:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -25,9 +25,9 @@ jobs:
       - name: Log into registry
         run: echo "${{ secrets.DOCKERHUB_SECRET }}" | docker login --username okadash --password-stdin
 
-      - name: Build and push Debian Base images
+      - name: Build and push Debian-based test images
         run: |
           . .github_script.sh
-          [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && target="$(echo ${GITHUB_REF%-dev} )"
+          set_test_target
           TAG_POSTFIX="test" filtered_build
           TAG_POSTFIX="test" filtered_push
