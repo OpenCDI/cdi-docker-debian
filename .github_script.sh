@@ -54,10 +54,10 @@ push_image(){
   done
 }
 
-## filter target images for test images releases on *-dev branch
+## filter target images for test images releases on *-test branch
 filter_image(){
-  if [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ]; then
-    filter_target="${TEST_TARGET:-${GITHUB_REF%-dev}}"
+  if [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ]; then
+    filter_target="${TEST_TARGET:-${GITHUB_REF%-test}}"
     echo */* | tr \\\  \\\n | grep -i "${filter_target##*/}"
   elif [ "${GITHUB_REF}" != "${GITHUB_REF%-script}" ]; then
     echo */* | tr \\\  \\\n | grep -i "${TEST_TARGET:-firefox}"
@@ -85,11 +85,12 @@ rmi_without_core(){
   docker rmi $images
 }
 
-# for *-dev branches, TEST_TARGET=*
+# variable TEST_TARGET is created from branch name
+# for *-test branches, TEST_TARGET=*
 # for test branch, TEST_TARET not set
 set_test_target(){
-  [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && {
-    TEST_TARGET="${GITHUB_REF%-dev}"
+  [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ] && {
+    TEST_TARGET="${GITHUB_REF%-test}"
     TEST_TARGET="${TEST_TARGET##*/}"
   }
   TAG_POSTFIX="test" 

@@ -6,6 +6,7 @@ on:
     branches:
       - test
       - '**-dev'
+      - '**-test'
 
 env:
   LOGIN_NAME: coshapp
