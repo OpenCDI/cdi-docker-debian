@@ -20,12 +20,13 @@ is_non_test_img(){
           
 build_image(){ 
   set -o xtrace
-  [ -n "$TEST_TARGET" && "$TEST_TARGET" != "${TEST_TARGET#Core}" ] && {
+  # for autobuild and shipping on \*-test (but not core-test) branches
+  if [ -n "$TEST_TARGET" ] && [ "$TEST_TARGET" != "${TEST_TARGET#Core}" ]; then 
     docker pull coshapp/core:buster-10.7-test
     docker pull coshapp/core:buster-l10n-ja-10.7-test
     docker tag coshapp/core:buster-10.7-test coshapp/core:buster-10.7
     docker tag coshapp/core:buster-l10n-ja-10.7-test coshapp/core:buster-l10n-ja-10.7
-  }
+  fi
   for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-10.7}; do 
     for j in $@; do
       export coshapp_ver;
