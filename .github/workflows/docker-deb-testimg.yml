@@ -1,4 +1,4 @@
-name: debian-base
+name: deb-testimg
 
 on:
   push:
@@ -29,5 +29,5 @@ jobs:
         run: |
           . .github_script.sh
           set_test_target
-          TAG_POSTFIX="test" filtered_build
-          TAG_POSTFIX="test" filtered_push
+          filtered_build
+          filtered_push

@@ -20,6 +20,12 @@ is_non_test_img(){
           
 build_image(){ 
   set -o xtrace
+  [ -n "$TEST_TARGET" ] && {
+    docker pull coshapp/core:buster-10.7-test
+    docker pull coshapp/core:buster-l10n-ja-10.7-test
+    docker tag coshapp/core:buster-10.7-test coshapp/core:buster-10.7
+    docker tag coshapp/core:buster-l10n-ja-10.7-test coshapp/core:buster-l10n-ja-10.7
+  }
   for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-10.7}; do 
     for j in $@; do
       export coshapp_ver;
@@ -86,4 +92,5 @@ set_test_target(){
     TEST_TARGET="${GITHUB_REF%-dev}"
     TEST_TARGET="${TEST_TARGET##*/}"
   }
+  TAG_POSTFIX="test" 
 }

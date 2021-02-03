@@ -1,4 +1,4 @@
-name: debian-base
+name: debian-base-crony
 
 on:
   schedule:
