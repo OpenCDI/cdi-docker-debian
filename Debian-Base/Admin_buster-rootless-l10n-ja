@@ -1,10 +1,11 @@
-FROM coshapp/core:buster-l10n-ja
+ARG COSHAPP_BASE_VERSION
+FROM coshapp/core:buster-l10n-ja-${COSHAPP_BASE_VERSION:-10.7}
+
 RUN apt-get install -y git curl jq vim-tiny
 RUN apt-get install -y uidmap
 RUN apt-get install -y uim-xim uim-mozc
 RUN apt-get install -y nftables
 RUN apt-get clean all
-RUN useradd -m duser
 RUN groupadd -g 124 docker
 RUN usermod -aG docker duser
 

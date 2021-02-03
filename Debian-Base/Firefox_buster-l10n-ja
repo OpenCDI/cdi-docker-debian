@@ -1,6 +1,5 @@
 ARG COSHAPP_BASE_VERSION
-FROM debian:${COSHAPP_BASE_VERSION:-10.7}
-label maintainer="Okadarien Saru <okadas@tanban.org>"
+FROM coshapp/core:buster-l10n-ja-${COSHAPP_BASE_VERSION:-10.7}
 
 RUN apt-get update
 RUN apt-get install -y apt-transport-https ca-certificates openssl
@@ -12,6 +11,4 @@ RUN apt-get install -y locales locales-all
 RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji
 RUN apt-get install -y firefox-esr firefox-esr-l10n-ja
 RUN apt-get clean all
-RUN useradd -m duser
-RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 CMD /bin/sh

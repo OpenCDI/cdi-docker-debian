@@ -1,31 +1,15 @@
 ARG COSHAPP_BASE_VERSION
-FROM debian:${COSHAPP_BASE_VERSION:-10.7}
-label maintainer="Okadarien Saru <okadas@tanban.org>"
+FROM coshapp/core:buster-${COSHAPP_BASE_VERSION:-10.7}
 
-RUN apt-get update
-RUN apt-get install -y apt-transport-https ca-certificates openssl
-RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
-RUN apt-get install -y mate
-RUN apt-get install -y pulseaudio
-RUN apt-get install -y sudo
-RUN apt-get install -y locales locales-all
 RUN apt-get install -y curl gpg
-
 RUN apt-get clean all
-
-RUN useradd -m duser
-USER duser
 WORKDIR /home/duser
-RUN curl -L https://archive.mozilla.org/pub/firefox/releases/84.0/KEY | gpg --import -
-RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/84.0/linux-x86_64/en-US/firefox-84.0.tar.bz2.asc > firefox-84.0.tar.bz2.asc
-RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/84.0/linux-x86_64/en-US/firefox-84.0.tar.bz2 > firefox-84.0.tar.bz2
-RUN gpg --verify firefox-84.0.tar.bz2.asc
-RUN tar xjf firefox-84.0.tar.bz2
+USER duser
+RUN curl -L https://archive.mozilla.org/pub/firefox/releases/85.0/KEY | gpg --import -
+RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/85.0/linux-x86_64/en-US/firefox-85.0.tar.bz2.asc > firefox-85.0.tar.bz2.asc
+RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/85.0/linux-x86_64/en-US/firefox-85.0.tar.bz2 > firefox-85.0.tar.bz2
+RUN gpg --verify firefox-85.0.tar.bz2.asc
+RUN tar xjf firefox-85.0.tar.bz2
 ENV PATH=/home/duser/firefox:$PATH
 
-#FROM scratch 
-#COPY --from=downloader /firefox/* /usr/local/bin/
-#COPY --from=downloader /etc/passwd /etc/passwd
-#COPY --from=downloader /etc/nsswitch.conf /etc/nsswitch.conf
-#COPY --from=downloader /etc/resolv.conf /etc/resolv.conf
 CMD /bin/sh

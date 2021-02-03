@@ -1,29 +1,16 @@
 ARG COSHAPP_BASE_VERSION
-FROM debian:${COSHAPP_BASE_VERSION:-10.7}
-label maintainer="Okadarien Saru <okadas@tanban.org>"
+FROM coshapp/core:buster-l10n-ja-${COSHAPP_BASE_VERSION:-10.7}
 
-RUN apt-get update
-RUN apt-get install -y apt-transport-https ca-certificates openssl
-RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
-RUN apt-get install -y mate
-RUN apt-get install -y pulseaudio
-RUN apt-get install -y sudo
-RUN apt-get install -y locales locales-all
-RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji
 RUN apt-get install -y curl gpg
-
 RUN apt-get clean all
-
-RUN useradd -m duser
-RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 USER duser
 WORKDIR /home/duser
-RUN curl -L https://archive.mozilla.org/pub/firefox/releases/84.0/KEY | gpg --import -
-RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/84.0/linux-x86_64/ja/firefox-84.0.tar.bz2.asc > firefox-84.0.tar.bz2.asc
-RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/84.0/linux-x86_64/ja/firefox-84.0.tar.bz2 > firefox-84.0.tar.bz2
-RUN gpg --verify firefox-84.0.tar.bz2.asc
-RUN tar xjf firefox-84.0.tar.bz2
+RUN curl -L https://archive.mozilla.org/pub/firefox/releases/85.0/KEY | gpg --import -
+RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/85.0/linux-x86_64/ja/firefox-85.0.tar.bz2.asc > firefox-85.0.tar.bz2.asc
+RUN curl -sL https://archive.mozilla.org/pub/firefox/releases/85.0/linux-x86_64/ja/firefox-85.0.tar.bz2 > firefox-85.0.tar.bz2
+RUN gpg --verify firefox-85.0.tar.bz2.asc
+RUN tar xjf firefox-85.0.tar.bz2
 ENV PATH=/home/duser/firefox:$PATH
 
 CMD /bin/sh
