@@ -1,17 +1,7 @@
 ARG COSHAPP_BASE_VERSION
-FROM debian:${COSHAPP_BASE_VERSION:-10.7}-slim
-label maintainer="Okadarien Saru <okadas@tanban.org>"
+FROM coshapp/core:buster-${COSHAPP_BASE_VERSION:-10.7}
 
-RUN apt-get update
-RUN apt-get install -y apt-transport-https ca-certificates openssl
-RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
-RUN apt-get install -y mate
-RUN apt-get install -y pulseaudio
-RUN apt-get install -y sudo
-RUN apt-get install -y locales locales-all
-
-RUN apt-get install -y uim-xim uim-mozc
 RUN apt-get install -y tightvncserver
 RUN apt-get clean all
-RUN useradd -m duser
+USER duser
 CMD /bin/sh
