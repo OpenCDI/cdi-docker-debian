@@ -9,6 +9,7 @@ RUN apt-get install -y mate
 RUN apt-get install -y pulseaudio
 RUN apt-get install -y sudo
 RUN apt-get install -y locales locales-all
+RUN apt-get install -y curl
 
 RUN apt-get clean all
 RUN useradd -m duser
