@@ -33,7 +33,7 @@ case "${TRAVIS_BRANCH}" in
     docker build -t "localhost/$app" -f $i .
     docker rmi localhost/$app
   done ;;
-  *-dev)
+  *-dev|*-test)
   for i in $(ls */*); do
     app=$(echo $i | tr A-Z a-z)
     app=${app##*/}
