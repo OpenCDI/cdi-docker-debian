@@ -21,22 +21,7 @@ ENV PATH=/home/duser/.shef/bin:$PATH
 ENV XDG_RUNTIME_DIR=/run/user/1000
 ENV PATH=/home/duser/bin:$PATH:/sbin
 ENV DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
-RUN mkdir $HOME/.local
 
 RUN /home/duser/bin/docker help version || exit 1
-
-RUN mkdir -p /home/duser/local/shelib
-WORKDIR /home/duser/local/shelib
-RUN git config --global user.name saru
-RUN git config --global user.email saru@localhost
-
-RUN git clone https://github.com/okadash/shelib /home/duser/local/shelib
-WORKDIR /home/duser/local/shelib
-RUN ./install.sh || cp -av bin/shef /home/duser/.shef/bin 
-ENV PATH=/home/duser/.shef/bin:$PATH
-
-ENV EDITOR=/usr/bin/vi
-RUN shef install https://github.com/okadash/cosh
-RUN shef install https://github.com/okadash/nik
 
 CMD /bin/sh

@@ -26,18 +26,4 @@ RUN mkdir $HOME/.local
 
 RUN /home/duser/bin/docker help version || exit 1
 
-RUN mkdir -p /home/duser/local/shef
-WORKDIR /home/duser/local/shef
-RUN git config --global user.name saru
-RUN git config --global user.email saru@localhost
-
-RUN git clone https://github.com/okadash/shef /home/duser/local/shef
-WORKDIR /home/duser/local/shef
-RUN ./install.sh || cp -av bin/shef /home/duser/.shef/bin 
-ENV PATH=/home/duser/.shef/bin:$PATH
-
-ENV EDITOR=/usr/bin/vi
-RUN shef install https://github.com/okadash/cosh
-RUN shef install https://github.com/okadash/nik
-
 CMD /bin/sh
