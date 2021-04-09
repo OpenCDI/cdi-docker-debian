@@ -26,12 +26,12 @@ build_image(){
   set -o xtrace
   # for autobuild and shipping on \*-test (but not core-test) branches
   if [ -n "$TEST_TARGET" ] && [ "$TEST_TARGET" = "${TEST_TARGET#Core_*}" ]; then 
-    docker pull coshapp/core:buster-10.7-test
-    docker pull coshapp/core:buster-l10n-ja-10.7-test
-    docker tag coshapp/core:buster-10.7-test coshapp/core:buster-10.7
-    docker tag coshapp/core:buster-l10n-ja-10.7-test coshapp/core:buster-l10n-ja-10.7
+    docker pull coshapp/core:buster-10.9-test
+    docker pull coshapp/core:buster-l10n-ja-10.9-test
+    docker tag coshapp/core:buster-10.9-test coshapp/core:buster-10.9
+    docker tag coshapp/core:buster-l10n-ja-10.9-test coshapp/core:buster-l10n-ja-10.9
   fi
-  for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-10.7}; do 
+  for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-10.9}; do 
     for j in $@; do
       export coshapp_ver;
       set_image_name "$j" ;
@@ -46,7 +46,7 @@ build_image(){
 
 push_image(){
   set -o xtrace
-  for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-10.7}; do 
+  for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-10.9}; do 
     for j in $@; do
       export coshapp_ver;
       set_image_name "$j" ;

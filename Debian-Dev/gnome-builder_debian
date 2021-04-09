@@ -1,5 +1,5 @@
 ARG COSHAPP_BASE_VERSION
-FROM coshapp/core:buster-${COSHAPP_BASE_VERSION:-10.7}
+FROM coshapp/core:buster-${COSHAPP_BASE_VERSION:-10.9}
 
 RUN apt-get install -y firefox-esr 
 RUN apt-get install -y curl

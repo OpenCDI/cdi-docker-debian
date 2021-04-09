@@ -1,5 +1,5 @@
 ARG COSHAPP_BASE_VERSION
-FROM debian:${COSHAPP_BASE_VERSION:-10.7}
+FROM debian:${COSHAPP_BASE_VERSION:-10.9}
 
 RUN apt-get update
 RUN apt-get install -y apt-transport-https ca-certificates openssl

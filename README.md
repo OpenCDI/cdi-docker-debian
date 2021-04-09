@@ -46,6 +46,6 @@ OpenCDI and its application layer Dockerfiles are fully opensource (MIT) and you
 To get docker images, pull them from our [repository on DockerHub](https://hub.docker.com/u/coshapp).
 
 ```
-docker pull coshapp/core:debian-10.7
+docker pull coshapp/core:debian-10.9
 ```
 

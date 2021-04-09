@@ -16,7 +16,7 @@ case "${TRAVIS_BRANCH}" in
     app=$(echo ${app:?app not set} | tr A-Z a-z)
     app=${app#*/}
     docker build -t "coshapp/$app" -f $i .
-    docker tag "coshapp/$app" "coshapp/${app}-${COSHAPP_BASE_VERSION:-10.7}"
+    docker tag "coshapp/$app" "coshapp/${app}-${COSHAPP_BASE_VERSION:-10.9}"
     [ "${app##*:}" = "debian" ] \
       && docker tag "coshapp/$app" "coshapp/${app%%:*}:latest" \
       || echo $app build finished
