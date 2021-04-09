@@ -1,14 +1,14 @@
-name: debian-base
+name: test-images
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
+    # Publish `test`, `*-test` branch as *-test image.
     branches:
-      - fix-ci-script
-      - fix-travis-script
+      - '**-test'
   pull_request:
+    # Publish `test`, `*-test` branch as *-test image.
     branches:
-      - master
+      - '**-test'
 
 env:
   LOGIN_NAME: coshapp
@@ -17,7 +17,7 @@ jobs:
 
   # Push image to DockerHub.
   # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  push-test-img:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -28,9 +28,9 @@ jobs:
       - name: Log into registry
         run: echo "${{ secrets.DOCKERHUB_SECRET }}" | docker login --username okadash --password-stdin
 
-      - name: Build and push Debian Base images
+      - name: Build and push Debian-based test images
         run: |
           . .github_script.sh
-          TEST_TARGET="thunderbird"
-          TAG_POSTFIX="test" filtered_build
-          TAG_POSTFIX="test" filtered_push
+          set_test_target
+          filtered_build
+          filtered_push

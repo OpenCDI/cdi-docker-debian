@@ -1,20 +1,10 @@
 ARG COSHAPP_BASE_VERSION
-FROM debian:${COSHAPP_BASE_VERSION:-10.7}
-label maintainer="Okadarien Saru <okadas@tanban.org>"
+FROM coshapp/core:buster-${COSHAPP_BASE_VERSION:-10.9}
 
-RUN apt-get update
-RUN apt-get install -y apt-transport-https ca-certificates openssl
-RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
-RUN apt-get install -y mate
-RUN apt-get install -y pulseaudio
-RUN apt-get install -y sudo
-RUN apt-get install -y locales locales-all
-
-RUN apt-get install -y uim-xim uim-mozc
 RUN apt-get install -y git curl jq vim-tiny
 RUN apt-get install -y uidmap
+RUN apt-get install -y nftables
 RUN apt-get clean all
-RUN useradd -m duser
 RUN groupadd -g 124 docker
 RUN usermod -aG docker duser
 
@@ -31,22 +21,7 @@ ENV PATH=/home/duser/.shef/bin:$PATH
 ENV XDG_RUNTIME_DIR=/run/user/1000
 ENV PATH=/home/duser/bin:$PATH:/sbin
 ENV DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
-RUN mkdir $HOME/.local
 
 RUN /home/duser/bin/docker help version || exit 1
-
-RUN mkdir -p /home/duser/local/shef
-WORKDIR /home/duser/local/shef
-RUN git config --global user.name saru
-RUN git config --global user.email saru@localhost
-
-RUN git clone https://github.com/okadash/shef /home/duser/local/shef
-WORKDIR /home/duser/local/shef
-RUN ./install.sh || cp -av bin/shef /home/duser/.shef/bin 
-ENV PATH=/home/duser/.shef/bin:$PATH
-
-ENV EDITOR=/usr/bin/vi
-RUN shef install https://github.com/okadash/cosh
-RUN shef install https://github.com/okadash/nik-transitional
 
 CMD /bin/sh

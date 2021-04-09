@@ -1,11 +1,14 @@
-name: debian-base
+name: test-scripts
 
 on:
   push:
-    # Publish `test` or `*-dev` branch as *-test image.
+    # Publish `master` as Docker `latest` image.
     branches:
-      - test
-      - '**-dev'
+      - fix-ci-script
+      - fix-travis-script
+  pull_request:
+    branches:
+      - master
 
 env:
   LOGIN_NAME: coshapp
@@ -28,6 +31,6 @@ jobs:
       - name: Build and push Debian Base images
         run: |
           . .github_script.sh
-          [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && target="$(echo ${GITHUB_REF%-dev} )"
+          set_test_target "thunderbird"
           TAG_POSTFIX="test" filtered_build
           TAG_POSTFIX="test" filtered_push
