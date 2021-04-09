@@ -8,7 +8,7 @@ You can also make containerized desktop environment, which is more tolerant to s
 # Build details
 
 | Application name | Travis status | DockerHub |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | Admin | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=admin-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Chromium | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=chromium-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
 | Core | [![Build Status](https://travis-ci.com/OpenCDI/cdi-docker-debian.svg?branch=core-dev)](https://travis-ci.com/OpenCDI/cdi-docker-debian) | - | 
