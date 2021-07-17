@@ -1,5 +1,5 @@
 ARG COSHAPP_BASE_VERSION
-FROM coshapp/core:buster-l10n-ja-${COSHAPP_BASE_VERSION:-10.9}
+FROM coshapp/core:buster-l10n-ja-${COSHAPP_BASE_VERSION:-10.10}
 
 RUN apt-get update
 RUN apt-get install -y apt-transport-https ca-certificates openssl
