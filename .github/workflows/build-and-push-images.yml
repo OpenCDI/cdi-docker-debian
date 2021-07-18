@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Log into registry
-        run: echo "${{ secrets.DOCKERHUB_SECRET }}" | docker login --username okadash --password-stdin
+        run: echo "${{ secrets.DOCKERHUB_SECRET }}" | docker login --username "${{ secrets.DOCKERHUB_USERNAME }}"  --password-stdin
 
       - name: Build and push Debian Base images
         run: |
