@@ -1,6 +1,8 @@
 #!/bin/bash
 
 throw(){ echo $@ >&2 ; exit 1; }
+
+base_version=10.10
           
 set_image_name(){ 
   image_name="$(echo $1 | tr A-Z a-z | sed s/_\.\*//g)"
@@ -24,14 +26,15 @@ is_non_test_no_core_img(){
           
 build_image(){ 
   set -o xtrace
+  : ${base_version:?base_version not set}
   # for autobuild and shipping on \*-test (but not core-test) branches
   if [ -n "$TEST_TARGET" ] && [ "$TEST_TARGET" = "${TEST_TARGET#core*}" ]; then 
-    docker pull coshapp/core:buster-10.9-test
-    docker pull coshapp/core:buster-l10n-ja-10.9-test
-    docker tag coshapp/core:buster-10.9-test coshapp/core:buster-10.9
-    docker tag coshapp/core:buster-l10n-ja-10.9-test coshapp/core:buster-l10n-ja-10.9
+    docker pull coshapp/core:buster-${base_version}-test
+    docker pull coshapp/core:buster-l10n-ja-${base_version}-test
+    docker tag coshapp/core:buster-${base_version} coshapp/core:buster-${base_version}
+    docker tag coshapp/core:buster-l10n-ja-${base_version}-test coshapp/core:buster-l10n-ja-${base_version}
   fi
-  for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-10.9}; do 
+  for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-${base_version}}; do 
     for j in $@; do
       export coshapp_ver;
       set_image_name "$j" ;
@@ -46,7 +49,7 @@ build_image(){
 
 push_image(){
   set -o xtrace
-  for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-10.9}; do 
+  for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-$base_version}; do 
     for j in $@; do
       export coshapp_ver;
       set_image_name "$j" ;
