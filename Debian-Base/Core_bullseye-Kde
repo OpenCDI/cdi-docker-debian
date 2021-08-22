@@ -10,7 +10,7 @@ RUN apt-get install -y sudo curl vim-nox
 RUN apt-get install -y pulseaudio
 RUN apt-get install -y locales locales-all
 RUN apt-get install -y cups system-config-printer
-RUN apt-get install -y plasma-desktop
+RUN apt-get install -y plasma-desktop konsole
 RUN apt-get clean all
 RUN useradd -m duser
 RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
