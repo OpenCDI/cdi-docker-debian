@@ -4,8 +4,7 @@ on:
   push:
     # Publish `master` as Docker `latest` image.
     branches:
-      - fix-ci-script
-      - fix-travis-script
+      - dev
   pull_request:
     branches:
       - master
