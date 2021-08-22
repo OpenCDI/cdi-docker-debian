@@ -68,7 +68,7 @@ filter_image(){
     filter_target="${TEST_TARGET:-firefox}}"
     echo */* | tr \\\  \\\n | grep -i "${filter_target##*/}"
   else
-    echo */*  ## equal to build_all
+    exit 1 #abort for invalid filtering
   fi
 }
 
