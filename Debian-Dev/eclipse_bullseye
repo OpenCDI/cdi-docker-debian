@@ -1,9 +1,6 @@
 ARG COSHAPP_BASE_VERSION
-FROM coshapp/core:bullseye-${COSHAPP_BASE_VERSION:-11.0}
+FROM coshapp/libreoffice:bullseye-${COSHAPP_BASE_VERSION:-11.0}
 
-RUN apt-get install -y firefox-esr 
-RUN apt-get install -y openjdk-11-jre-headless
-RUN apt-get install -y openjdk-11-jdk
 RUN apt-get install -y eclipse-titan
 RUN apt-get install -y eclipse-debian-helper libeclipse-compare-java libeclipse-core-commands-java libeclipse-search-java libeclipse-team-core-java libeclipse-team-ui-java libeclipse-text-java libeclipse-ui-java libeclipse-ui-editors-java libeclipse-ui-genericeditor-java libeclipse-ui-ide-java libeclipse-ui-ide-application-java libeclipse-ui-views-java libeclipse-ui-navigator-java libeclipse-help-java libeclipse-emf-common-java libeclipse-emf-ecore-java libeclipse-emf-ecore-xmi-java libeclipse-core-commands-java libeclipse-core-contenttype-java libeclipse-core-databinding-java libeclipse-core-databinding-beans-java libeclipse-core-databinding-observable-java libeclipse-core-expressions-java libeclipse-core-filesystem-java libeclipse-core-filebuffers-java libeclipse-core-jobs-java libeclipse-core-net-java libeclipse-core-resources-java libeclipse-core-runtime-java libeclipse-core-variables-java libeclipse-debug-core-java libeclipse-debug-ui-java
 
