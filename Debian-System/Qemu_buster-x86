@@ -1,5 +1,5 @@
 ARG COSHAPP_BASE_VERSION
-FROM debian:${COSHAPP_BASE_VERSION:-10.10}-slim
+FROM debian:${COSHAPP_BASE_VERSION:-11.0}-slim
 
 RUN sh -c 'for i in 1 2 3 4 5 6 7 8; do t="/usr/share/man/man${i}"; [ ! -d "$t" ] && mkdir -pv $t || echo skipping ${t}...; done'
 RUN apt-get update

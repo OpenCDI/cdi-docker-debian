@@ -2,7 +2,7 @@
 
 throw(){ echo $@ >&2 ; exit 1; }
 
-base_version=10.10
+base_version=11.0
           
 set_image_name(){ 
   image_name="$(echo $1 | tr A-Z a-z | sed s/_\.\*//g)"
@@ -13,7 +13,7 @@ set_image_name(){
 }
 
 is_non_l10n_img(){
-  [ "${tag_name#buster}" = "" ] && return 0 || return 1
+  [ "${tag_name#bullseye}" = "" ] && return 0 || return 1
 }
 
 is_non_test_no_core_img(){
@@ -29,10 +29,10 @@ build_image(){
   : ${base_version:?base_version not set}
   # for autobuild and shipping on \*-test (but not core-test) branches
   if [ -n "$TEST_TARGET" ] && [ "$TEST_TARGET" = "${TEST_TARGET#core*}" ]; then 
-    docker pull coshapp/core:buster-${base_version}-test
-    docker pull coshapp/core:buster-l10n-ja-${base_version}-test
-    docker tag coshapp/core:buster-${base_version} coshapp/core:buster-${base_version}
-    docker tag coshapp/core:buster-l10n-ja-${base_version}-test coshapp/core:buster-l10n-ja-${base_version}
+    docker pull coshapp/core:bullseye-${base_version}-test
+    docker pull coshapp/core:bullseye-l10n-ja-${base_version}-test
+    docker tag coshapp/core:bullseye-${base_version} coshapp/core:bullseye-${base_version}
+    docker tag coshapp/core:bullseye-l10n-ja-${base_version}-test coshapp/core:bullseye-l10n-ja-${base_version}
   fi
   for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-${base_version}}; do 
     for j in $@; do
