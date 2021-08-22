@@ -29,10 +29,8 @@ build_image(){
   : ${base_version:?base_version not set}
   # for autobuild and shipping on \*-test (but not core-test) branches
   if [ -n "$TEST_TARGET" ] && [ "$TEST_TARGET" = "${TEST_TARGET#core*}" ]; then 
-    docker pull coshapp/core:bullseye-${base_version}-test
-    docker pull coshapp/core:bullseye-l10n-ja-${base_version}-test
-    docker tag coshapp/core:bullseye-${base_version} coshapp/core:bullseye-${base_version}
-    docker tag coshapp/core:bullseye-l10n-ja-${base_version}-test coshapp/core:bullseye-l10n-ja-${base_version}
+    docker build -t coshapp/core:bullseye-${base_version}-test -f ./Debian-Base/Core_bullseye ./Debian-Base
+    docker tag coshapp/core:bullseye-${base_version}-test coshapp/core:bullseye-${base_version}
   fi
   for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-${base_version}}; do 
     for j in $@; do
@@ -73,10 +71,12 @@ filter_image(){
 }
 
 # build with branch filtering
-filtered_build(){ build_image $(filter_image); }
+test_build(){ 
+	build_image $(filter_image); 
+}
 
 # push with branch filtering
-filtered_push(){ push_image $(filter_image); }
+test_push(){ push_image $(filter_image); }
 
 # build all images ontshot
 build_all(){ build_image */*; }
@@ -97,7 +97,7 @@ rmi_without_core(){
 set_test_target(){
   TAG_POSTFIX="test" 
   [ $# -ne 0 ] && TEST_TARGET="$1"
-  [ $# -eq 0 ] && [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ] && {
+  [ $# -eq 0 ] && [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && {
     TEST_TARGET="${GITHUB_REF%-test}"
     TEST_TARGET="${TEST_TARGET##*/}"
   }
