@@ -1,0 +1,29 @@
+ARG COSHAPP_BASE_VERSION
+FROM coshapp/core:buster-l10n-ja-${COSHAPP_BASE_VERSION:-10.10}
+
+RUN apt-get install -y git curl jq vim-tiny
+RUN apt-get install -y uidmap
+RUN apt-get install -y uim-xim uim-mozc
+RUN apt-get install -y nftables
+RUN apt-get clean all
+RUN groupadd -g 124 docker
+RUN usermod -aG docker duser
+
+RUN mkdir -vp /run/user/1000
+RUN chown 1000:1000 /run/user/1000
+RUN echo "duser  ALL = (ALL:ALL) NOPASSWD:/usr/bin/btrfs subvolume delete *"
+RUN visudo -c
+
+USER duser
+
+ENV SKIP_IPTABLES=1
+RUN curl -sL https://get.docker.com/rootless | sh
+ENV PATH=/home/duser/.shef/bin:$PATH
+ENV XDG_RUNTIME_DIR=/run/user/1000
+ENV PATH=/home/duser/bin:$PATH:/sbin
+ENV DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+RUN mkdir $HOME/.local
+
+RUN /home/duser/bin/docker help version || exit 1
+
+CMD /bin/sh

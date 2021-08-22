@@ -1,0 +1,12 @@
+ARG COSHAPP_BASE_VERSION
+FROM debian:${COSHAPP_BASE_VERSION:-10.10}-slim
+
+RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
+RUN apt-get install -y tcpdump squid squidguard 
+RUN apt-get install -y prometheus-squid-exporter
+RUN apt-get clean all
+RUN sed -r -i s/localhost/localnet/g /etc/squid/squid.conf
+RUN echo "acl prometheus src exporter.opencdi\nhttp_access allow manager prometheus" | tee -a /etc/squid/squid.conf
+CMD /bin/sh

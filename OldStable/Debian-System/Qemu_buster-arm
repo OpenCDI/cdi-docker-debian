@@ -1,0 +1,11 @@
+ARG COSHAPP_BASE_VERSION
+FROM debian:${COSHAPP_BASE_VERSION:-10.10}-slim
+
+RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
+RUN apt-get upgrade -y
+RUN apt-get install -y qemu-system-arm
+RUN apt-get clean all
+RUN useradd -m duser
+CMD /bin/sh

@@ -1,0 +1,12 @@
+ARG COSHAPP_BASE_VERSION
+FROM debian:${COSHAPP_BASE_VERSION:-10.10}-slim
+
+RUN sh -c 'for i in 1 2 3 4 5 6 7 8; do t="/usr/share/man/man${i}"; [ ! -d "$t" ] && mkdir -pv $t || echo skipping ${t}...; done'
+RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
+RUN apt-get upgrade -y
+RUN apt-get install -y qemu-system-sparc
+RUN apt-get clean all
+RUN useradd -m duser
+CMD /bin/sh

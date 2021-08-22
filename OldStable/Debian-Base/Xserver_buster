@@ -1,0 +1,16 @@
+ARG COSHAPP_BASE_VERSION
+FROM debian:${COSHAPP_BASE_VERSION:-10.10}
+
+RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
+RUN apt-get install -y sudo
+RUN apt-get install -y locales locales-all
+RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji
+RUN apt-get install -y xorg
+RUN apt-get install -y twm xterm
+RUN apt-get clean all
+RUN useradd -m duser
+USER duser
+WORKDIR /home/duser
+CMD /bin/sh

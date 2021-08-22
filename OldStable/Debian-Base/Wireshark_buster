@@ -1,0 +1,8 @@
+ARG COSHAPP_BASE_VERSION
+FROM coshapp/core:buster-${COSHAPP_BASE_VERSION:-10.10}
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y wireshark-gtk
+
+RUN apt-get clean all
+CMD /bin/sh
