@@ -2,7 +2,7 @@
 
 throw(){ echo $@ >&2 ; exit 1; }
 
-base_version=10.10
+base_version=11.0
           
 set_image_name(){ 
   image_name="$(echo $1 | tr A-Z a-z | sed s/_\.\*//g)"
@@ -13,7 +13,7 @@ set_image_name(){
 }
 
 is_non_l10n_img(){
-  [ "${tag_name#buster}" = "" ] && return 0 || return 1
+  [ "${tag_name#bullseye}" = "" ] && return 0 || return 1
 }
 
 is_non_test_no_core_img(){
@@ -29,10 +29,8 @@ build_image(){
   : ${base_version:?base_version not set}
   # for autobuild and shipping on \*-test (but not core-test) branches
   if [ -n "$TEST_TARGET" ] && [ "$TEST_TARGET" = "${TEST_TARGET#core*}" ]; then 
-    docker pull coshapp/core:buster-${base_version}-test
-    docker pull coshapp/core:buster-l10n-ja-${base_version}-test
-    docker tag coshapp/core:buster-${base_version} coshapp/core:buster-${base_version}
-    docker tag coshapp/core:buster-l10n-ja-${base_version}-test coshapp/core:buster-l10n-ja-${base_version}
+    docker build -t coshapp/core:bullseye-${base_version}-test -f ./Debian-Base/Core_bullseye ./Debian-Base
+    docker tag coshapp/core:bullseye-${base_version}-test coshapp/core:bullseye-${base_version}
   fi
   for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-${base_version}}; do 
     for j in $@; do
@@ -64,21 +62,21 @@ push_image(){
 
 ## filter target images for test images releases on *-test branch
 filter_image(){
-  if [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ]; then
-    filter_target="${TEST_TARGET:-${GITHUB_REF%-test}}"
+  if [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ]; then
+    filter_target="${TEST_TARGET:-firefox}}"
     echo */* | tr \\\  \\\n | grep -i "${filter_target##*/}"
-  elif [ "${GITHUB_REF}" != "${GITHUB_REF%-script}" ]; then
-    echo */* | tr \\\  \\\n | grep -i "${TEST_TARGET:-firefox}"
   else
-    echo */*  ## equal to build_all
+    exit 1 #abort for invalid filtering
   fi
 }
 
 # build with branch filtering
-filtered_build(){ build_image $(filter_image); }
+test_build(){ 
+	build_image $(filter_image); 
+}
 
 # push with branch filtering
-filtered_push(){ push_image $(filter_image); }
+test_push(){ push_image $(filter_image); }
 
 # build all images ontshot
 build_all(){ build_image */*; }
@@ -99,7 +97,7 @@ rmi_without_core(){
 set_test_target(){
   TAG_POSTFIX="test" 
   [ $# -ne 0 ] && TEST_TARGET="$1"
-  [ $# -eq 0 ] && [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ] && {
+  [ $# -eq 0 ] && [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && {
     TEST_TARGET="${GITHUB_REF%-test}"
     TEST_TARGET="${TEST_TARGET##*/}"
   }

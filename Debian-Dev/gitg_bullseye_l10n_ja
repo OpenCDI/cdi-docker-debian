@@ -1,0 +1,8 @@
+ARG COSHAPP_BASE_VERSION
+FROM coshapp/core:bullseye-l10n-ja-${COSHAPP_BASE_VERSION:-11.0}
+
+RUN apt-get install -y firefox-esr firefox-esr-l10n-ja
+RUN apt-get install -y gitg meld
+RUN apt-get clean all
+USER duser
+CMD /bin/sh

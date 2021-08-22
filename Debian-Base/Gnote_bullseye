@@ -1,0 +1,13 @@
+ARG COSHAPP_BASE_VERSION
+FROM coshapp/core:bullseye-${COSHAPP_BASE_VERSION:-11.0}
+
+RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
+RUN apt-get install -y mate
+RUN apt-get install -y pulseaudio
+RUN apt-get install -y sudo
+RUN apt-get install -y locales locales-all
+RUN apt-get install -y gnote
+RUN apt-get clean all
+CMD /bin/sh

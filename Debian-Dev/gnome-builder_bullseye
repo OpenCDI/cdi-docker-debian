@@ -1,0 +1,10 @@
+ARG COSHAPP_BASE_VERSION
+FROM coshapp/core:bullseye-${COSHAPP_BASE_VERSION:-11.0}
+
+RUN apt-get install -y firefox-esr 
+RUN apt-get install -y curl
+RUN apt-get install -y gnome-builder
+
+RUN apt-get clean all
+USER duser
+CMD /bin/sh

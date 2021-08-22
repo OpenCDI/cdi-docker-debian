@@ -1,0 +1,19 @@
+ARG COSHAPP_BASE_VERSION
+FROM debian:${COSHAPP_BASE_VERSION:-11.0}-slim
+
+RUN sh -c 'for i in 1 2 3 4 5 6 7 8; do t="/usr/share/man/man${i}"; [ ! -d "$t" ] && mkdir -pv $t || echo skipping ${t}...; done'
+RUN apt-get update
+RUN apt-get install -y apt-transport-https ca-certificates openssl
+RUN sed -r -i -e s@deb\ http://deb@deb\ https://deb@g /etc/apt/sources.list
+RUN apt-get upgrade -y
+RUN apt-get install -y sudo curl vim-nox
+RUN apt-get install -y pulseaudio
+RUN apt-get install -y locales locales-all
+RUN apt-get install -y libgtk-3-0 gnome-keyring
+RUN apt-get install -y cups system-config-printer
+RUN apt-get install -y mate
+RUN apt-get install -y fonts-noto-mono fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji fonts-ipafont fcitx5-mozc
+RUN apt-get clean all
+RUN useradd -m duser
+RUN cp -v /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+CMD /bin/sh
