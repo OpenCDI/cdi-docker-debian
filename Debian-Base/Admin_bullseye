@@ -1,7 +1,7 @@
 ARG COSHAPP_BASE_VERSION
 FROM coshapp/core:bullseye-${COSHAPP_BASE_VERSION:-11.0}
 
-RUN apt-get install -y git curl jq vim-tiny
+RUN apt-get install -y git curl jq vim-nox
 RUN apt-get install -y uidmap
 RUN apt-get install -y docker.io
 RUN apt-get clean all
