@@ -86,7 +86,7 @@ push_core(){ push_image Debian-Base/Core_*; }
 build_core(){ build_image Debian-Base/Core_*; }
 
 # remove all image without core
-rmi_without_core(){
+remove_app_image(){
   images="$(docker images | grep ${LOGIN_NAME:-coshapp} | awk '{print $1 ":" $2}' | grep -v ${LOGIN_NAME:-coshapp}/core:)"
   docker rmi $images
 }
