@@ -29,11 +29,14 @@ jobs:
           . .github_script.sh
           build_image Debian-Base/Core_*
           push_image Debian-Base/Core_*
+
           build_image Debian-Base/*
           push_image Debian-Base/*
-          rmi_without_core
+          remove_app_image
+
           build_image Debian-Dev/*
           push_image Debian-Dev/*
-          rmi_without_core
+          remove_app_image
+
           build_image Debian-System/*
           push_image Debian-System/*
