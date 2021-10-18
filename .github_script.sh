@@ -9,7 +9,7 @@ set_image_name(){
   image_name="${image_name#*/}"
   tag_name="$(echo $1 | tr A-Z a-z | sed s/\.\*_//g)"
   [ ! -z "$tag_name" ] || tag_name=null
-  img_desc="${LOGIN_NAME:-coshapp}/${image_name:?no imagename}:${tag_name:?no tagname}-${coshapp_ver:?no ver}${TAG_POSTFIX:+-$TAG_POSTFIX}" 
+  img_desc="${REGISTRY_NAME:-coshapp}/${image_name:?no imagename}:${tag_name:?no tagname}-${coshapp_ver:?no ver}${TAG_POSTFIX:+-$TAG_POSTFIX}" 
 }
 
 is_non_l10n_img(){
@@ -29,8 +29,8 @@ build_image(){
   : ${base_version:?base_version not set}
   # for autobuild and shipping on \*-test (but not core-test) branches
   if [ -n "$TEST_TARGET" ] && [ "$TEST_TARGET" = "${TEST_TARGET#core*}" ]; then 
-    docker build -t coshapp/core:bullseye-${base_version}-test -f ./Debian-Base/Core_bullseye ./Debian-Base
-    docker tag coshapp/core:bullseye-${base_version}-test coshapp/core:bullseye-${base_version}
+    docker build -t ${REGISTRY_NAME:-coshapp}/core:bullseye-${base_version}-test -f ./Debian-Base/Core_bullseye ./Debian-Base
+    docker tag ${REGISTRY_NAME:-coshapp}/core:bullseye-${base_version}-test ${REGISTRY_NAME:-coshapp}/core:bullseye-${base_version}
   fi
   for coshapp_ver in ${COSHAPP_DEBIAN_VERSION:-${base_version}}; do 
     for j in $@; do
@@ -87,7 +87,7 @@ build_core(){ build_image Debian-Base/Core_*; }
 
 # remove all image without core
 remove_app_image(){
-  images="$(docker images | grep ${LOGIN_NAME:-coshapp} | awk '{print $1 ":" $2}' | grep -v ${LOGIN_NAME:-coshapp}/core:)"
+  images="$(docker images | grep ${REGISTRY_NAME:-coshapp} | awk '{print $1 ":" $2}' | grep -v ${REGISTRY_NAME:-coshapp}/core:)"
   docker rmi $images
 }
 

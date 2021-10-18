@@ -7,7 +7,7 @@ on:
       - master
 
 env:
-  LOGIN_NAME: coshapp
+  REGISTRY_NAME: coshapp
 
 jobs:
 

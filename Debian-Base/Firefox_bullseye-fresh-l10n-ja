@@ -8,8 +8,7 @@ RUN curl -L https://archive.mozilla.org/pub/firefox/releases/93.0/KEY | gpg --im
   && curl -sL https://archive.mozilla.org/pub/firefox/releases/93.0/linux-x86_64/ja/firefox-93.0.tar.bz2 -o firefox-93.0.tar.bz2 \
   && gpg --verify firefox-93.0.tar.bz2.asc \
   && tar xjf firefox-93.0.tar.bz2 \
-  && rm -v firefox-93.0.tar.bz2 \
-"
+  && rm -v firefox-93.0.tar.bz2
 ENV PATH=/home/duser/firefox:$PATH
 
 CMD /bin/sh
