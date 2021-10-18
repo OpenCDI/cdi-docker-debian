@@ -7,7 +7,7 @@ Open Containerized Desktop Infrastructure (OpenCDI) is a light-weight desktop sa
 
 * Linux Kernel >= 4.17
 * CGroups v2 (cgroups with unified hierarchy)
-* podman or docker installation
+* podman or docker with fairly recent version of them.
 
 # Dockerfiles
 
@@ -17,11 +17,11 @@ All application is simply fetched with apt, and present software assets on debia
 To get docker images, pull them from our [repository on DockerHub](https://hub.docker.com/u/coshapp).
 
 ```
-docker pull coshapp/core:debian-11.0
+docker pull coshapp/core:debian-11.1
 ```
 
 Or you are using podman, add prepend hostname for the request: 
 
 ```
-podman pull docker.io/coshapp/core:debian-11.0
+podman pull docker.io/coshapp/core:debian-11.1
 ```
