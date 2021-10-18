@@ -5,7 +5,7 @@ on:
     - cron: '3 20 * * 6'
 
 env:
-  LOGIN_NAME: coshapp
+  REGISTRY_NAME: coshapp
 
 jobs:
 

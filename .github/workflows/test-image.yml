@@ -11,7 +11,7 @@ on:
       - '**-test'
 
 env:
-  LOGIN_NAME: coshapp
+  REGISTRY_NAME: coshapp
 
 jobs:
 
