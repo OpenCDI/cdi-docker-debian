@@ -1,5 +1,5 @@
 ARG COSHAPP_BASE_VERSION
-FROM coshapp/firefox:bullseye-l10n-ja-${COSHAPP_BASE_VERSION:-11.0}
+FROM coshapp/firefox:bullseye-l10n-ja-${COSHAPP_BASE_VERSION:-11.1}
 
 USER root
 RUN apt-get install -y openssl openssh-client curl
