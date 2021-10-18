@@ -2,7 +2,7 @@
 
 throw(){ echo $@ >&2 ; exit 1; }
 
-base_version=11.0
+base_version=11.1
           
 set_image_name(){ 
   image_name="$(echo $1 | tr A-Z a-z | sed s/_\.\*//g)"
