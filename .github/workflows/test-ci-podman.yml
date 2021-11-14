@@ -29,4 +29,4 @@ jobs:
 
       - name: Build Debian Firefox images
         run: |
-          bash -c ". ci_functions.sh; set_test_target 'core'; test_build;"
+          bash -c ". ci_functions.sh; set_test_target 'firefox'; test_build;"
