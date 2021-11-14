@@ -26,7 +26,7 @@ jobs:
 
       - name: Build and push Debian Base images
         run: |
-          . .github_script.sh
+          . ci_functions.sh
           build_image Debian-Base/Core_*
           push_image Debian-Base/Core_*
 

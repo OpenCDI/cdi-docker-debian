@@ -30,7 +30,7 @@ jobs:
 
       - name: Build and push Debian-based test images
         run: |
-          . .github_script.sh
+          . ci_functions.sh
           set_test_target
           filtered_build
           filtered_push

@@ -1,6 +1,0 @@
-ARG COSHAPP_BASE_VERSION
-FROM coshapp/core:bullseye-l10n-ja-${COSHAPP_BASE_VERSION:-11.1}
-
-RUN apt-get install -y gnote
-RUN apt-get clean all
-CMD /bin/sh

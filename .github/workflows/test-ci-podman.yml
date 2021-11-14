@@ -24,9 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Log into registry
-        run: echo "${{ secrets.DOCKERHUB_SECRET }}" | docker login --username "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+      - name: Install podman
+        run: sudo apt-get update -y && sudo apt-get install -y podman
 
-      - name: Build and push Debian Base images
+      - name: Build Debian Firefox images
         run: |
-          bash -c ". ci_functions.sh; set_test_target 'firefox'; test_build; test_push "
+          bash -c ". ci_functions.sh; set_test_target 'firefox'; test_build;"
