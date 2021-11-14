@@ -1,7 +1,7 @@
 # ABOUT
 
-Open Containerized Desktop Infrastructure (OpenCDI) is a light-weight desktop sandboxing mechanism for linux.
-[OpenCDI](https://github.com/opencdi/opencdi-scripts) and [cosh](https://gist.github.com/46f9ec7807ccc56f80105eaec7965ac8) are controller implementations for OpenCDI and you can use them to launch CDI containers on linux servers or linux laptop machines.
+Open Containerized Desktop Infrastructure (OpenCDI) is a light-weight desktop sandboxing mechanism for Linux.
+[OpenCDI](https://github.com/opencdi/opencdi-scripts) and [cosh](https://gist.github.com/46f9ec7807ccc56f80105eaec7965ac8) are controller implementations for OpenCDI and you can use them to launch CDI containers on Linux servers or Linux laptop machines.
 
 # Supported platform (or requirement)
 
@@ -26,7 +26,7 @@ Or you are using podman, add prepend hostname for the request:
 podman pull docker.io/coshapp/core:debian-11.1
 ```
 
-# Build tutorial
+# Build
 
 `ci_functions.sh` can be used to build your own images. First, you must build core image and you can choose images you want to build (or build all).
 
@@ -74,8 +74,8 @@ docker push 192.168.0.12:5000/example-image
 
 podman also works well as a client for docker registry. 
 
-### Attention 
+**Attention**: This registry has no authorization mechanisms. Never use it in production environment.
 
-This registry has no authorization mechanisms. Never use it in production environment.
+# Contributing
 
-
+See [this](CONTRIBUTING.md).
