@@ -1,5 +1,6 @@
 ARG COSHAPP_BASE_VERSION
-FROM coshapp/core:bullseye-${COSHAPP_BASE_VERSION:-11.1}
+ARG REGISTRY_NAME
+FROM ${REGISTRY_NAME:-coshapp}/core:bullseye-${COSHAPP_BASE_VERSION:-11.1}
 
 RUN apt-get install -y flatpak
 

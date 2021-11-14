@@ -1,10 +1,9 @@
 ARG COSHAPP_BASE_VERSION
-FROM coshapp/core:bullseye-${COSHAPP_BASE_VERSION:-11.1}
+ARG REGISTRY_NAME
+FROM ${REGISTRY_NAME:-coshapp}/core:bullseye-${COSHAPP_BASE_VERSION:-11.1}
 
-RUN apt-get install -y firefox-esr 
-RUN apt-get install -y openjdk-11-jre-headless
-RUN apt-get install -y libreoffice-gtk3
-RUN apt-get install -y libreoffice libreoffice-writer libreoffice-draw libreoffice-calc libreoffice-impress libreoffice-base
-RUN apt-get clean all
+RUN apt-get install -y firefox-esr && apt-get clean all
+RUN apt-get install -y openjdk-11-jre-headless && apt-get clean all
+RUN apt-get install -y libreoffice-gtk3 libreoffice libreoffice-writer libreoffice-draw libreoffice-calc libreoffice-impress libreoffice-base && apt-get clean all
 USER duser
 CMD /bin/sh

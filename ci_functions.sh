@@ -36,7 +36,9 @@ build_image(){
     for j in $@; do
       export coshapp_ver;
       set_image_name "$j" ;
-      docker build --build-arg=coshapp_ver=$coshapp_ver -t ${img_desc:?img not specified} -f "$j" .;
+      docker build \
+	      ${REGISTRY_NAME:+--build-arg=REGISTRY_NAME=$REGISTRY_NAME} \
+	      --build-arg=coshapp_ver=$coshapp_ver -t ${img_desc:?img not specified} -f "$j" .;
       : ${tag_name:? tag_name not set} 
       is_non_l10n_img && is_non_test_no_core_img && {
           docker tag $img_desc ${img_desc%%:*}:latest

@@ -25,3 +25,42 @@ Or you are using podman, add prepend hostname for the request:
 ```
 podman pull docker.io/coshapp/core:debian-11.1
 ```
+
+# Private container registries
+
+`ci_functions.sh` can be used to make images for private registries. 
+You can build images for private registries to specify REGISTRY_NAME environmental variable before you run `build_image` or `build_all`.
+You also can set it for `make`.
+
+At now, private registry support is only tested on [Docker registry](https://docs.docker.com/registry/). 
+
+## Private registry tutorial
+
+To build temporary registry, run following commands on docker host (here we assumes it has 192.168.0.12/24 as its IP):
+
+```
+docker run -dt --name registry-test-1 -p 192.168.0.12:5000:5000
+```
+
+This registry serves any requests over **unencrypted connection**. In general, TLS configuration is recommended but this temporary evaluation does not need additional registry configuration. On the other hand, you must reconfigure your dockerd which pushes or pulls in new images (here we call it `edge dockerd`).
+
+An edge dockerd cannot pushes or pull images over unencrypted connection by default.
+So you must pass dockerd `insecure-registries` option. Add /etc/docker/daemon.json by following description:
+
+```
+{
+  "insecure-registries": ["192.168.0.12:5000"]
+}
+```
+
+Now you can restart dockerd (systemctl resetart docker), and you can push or pull docker images for the registry:
+
+```
+docker push 192.168.0.12:5000/example-image
+```
+
+### Attention 
+
+This registry has no authorization mechanisms. Never use it in production environment.
+
+
