@@ -1,0 +1,32 @@
+name: test-scripts
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - master
+
+env:
+  REGISTRY_NAME: coshapp
+
+jobs:
+
+  # Push image to DockerHub.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install podman
+        run: apt-get update -y && apt-get install -y podman
+
+      - name: Build Debian Firefox images
+        run: |
+          bash -c ". ci_functions.sh; set_test_target 'core'; test_build;"

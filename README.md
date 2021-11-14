@@ -26,6 +26,19 @@ Or you are using podman, add prepend hostname for the request:
 podman pull docker.io/coshapp/core:debian-11.1
 ```
 
+# Build tutorial
+
+`ci_functions.sh` can be used to build your own images. First, you must build core image and you can choose images you want to build (or build all).
+
+```
+. ci_functions.sh
+build_core
+build_image Debian-Base/Firefox_bullseye*
+#or build_all to build all images in the repository
+```
+
+If you would like to use podman for the build, specify environmental variable `DOCKERIAN=podman` before a build.
+
 # Private container registries
 
 `ci_functions.sh` can be used to make images for private registries. 
@@ -58,6 +71,8 @@ Now you can restart dockerd (systemctl resetart docker), and you can push or pul
 ```
 docker push 192.168.0.12:5000/example-image
 ```
+
+podman also works well as a client for docker registry. 
 
 ### Attention 
 
