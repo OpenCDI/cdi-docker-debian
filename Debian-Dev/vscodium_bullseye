@@ -1,0 +1,12 @@
+ARG COSHAPP_BASE_VERSION
+ARG REGISTRY_NAME
+FROM ${REGISTRY_NAME:-coshapp}/firefox:bullseye-${COSHAPP_BASE_VERSION:-11.1}
+
+USER root
+RUN sh -exc "\
+	curl -sL https://github.com/VSCodium/vscodium/releases/download/1.62.3/codium_1.62.3-1637281224_amd64.deb -o codium.deb ;\
+	dpkg -i codium.deb ;\
+	rm -v codium.deb ;\
+"
+USER duser
+CMD /bin/sh
