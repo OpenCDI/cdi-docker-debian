@@ -100,9 +100,9 @@ remove_app_image(){
 # for test branch, TEST_TARET not set
 set_test_target(){
   TAG_POSTFIX="test" 
-  [ $# -ne 0 ] && TEST_TARGET="$1"
+  [ $# -ne 0 ] && TEST_TARGET="$1" || :
   [ $# -eq 0 ] && [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && {
     TEST_TARGET="${GITHUB_REF%-test}"
     TEST_TARGET="${TEST_TARGET##*/}"
-  }
+  } || :
 }
