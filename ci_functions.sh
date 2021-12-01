@@ -66,7 +66,7 @@ push_image(){
 
 ## filter target images for test images releases on *-test branch
 filter_image(){
-  if [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ]; then
+  if [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] || [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ]; then
     filter_target="${TEST_TARGET:-firefox}}"
     echo */* | tr \\\  \\\n | grep -i "${filter_target##*/}"
   else
