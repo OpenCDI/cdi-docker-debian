@@ -30,7 +30,7 @@ jobs:
 
       - name: Build and push Debian-based test images
         run: |
-          . ci_functions.sh
-          set_test_target
-          filtered_build
-          filtered_push
+          bash -exc "GITHUB_REF=$(git branch | grep -E \^\\\* | awk '{print $2}');\
+                     TEST_TARGET=$GITHUB_REF; \
+                     . ci_functions.sh; set_test_target; \
+                     test_build;"

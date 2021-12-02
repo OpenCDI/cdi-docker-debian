@@ -66,8 +66,8 @@ push_image(){
 
 ## filter target images for test images releases on *-test branch
 filter_image(){
-  if [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ]; then
-    filter_target="${TEST_TARGET:-firefox}}"
+  if [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] || [ "${GITHUB_REF}" != "${GITHUB_REF%-test}" ]; then
+    filter_target="${TEST_TARGET:-firefox}"
     echo */* | tr \\\  \\\n | grep -i "${filter_target##*/}"
   else
     exit 1 #abort for invalid filtering
@@ -100,9 +100,9 @@ remove_app_image(){
 # for test branch, TEST_TARET not set
 set_test_target(){
   TAG_POSTFIX="test" 
-  [ $# -ne 0 ] && TEST_TARGET="$1"
+  [ $# -ne 0 ] && TEST_TARGET="$1" || :
   [ $# -eq 0 ] && [ "${GITHUB_REF}" != "${GITHUB_REF%-dev}" ] && {
     TEST_TARGET="${GITHUB_REF%-test}"
     TEST_TARGET="${TEST_TARGET##*/}"
-  }
+  } || :
 }

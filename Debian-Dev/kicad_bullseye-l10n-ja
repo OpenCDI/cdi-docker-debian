@@ -3,6 +3,9 @@ ARG REGISTRY_NAME
 FROM ${REGISTRY_NAME:-coshapp}/firefox:bullseye-l10n-ja-${COSHAPP_BASE_VERSION:-11.1}
 
 USER root
-RUN apt-get install -y openssl openssh-client curl filezilla && apt-get clean all
+RUN sh -exc "\
+	apt-get install -y kicad kicad-template \
+	 apt-get clean all; \
+"
 USER duser
 CMD /bin/sh

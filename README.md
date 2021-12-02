@@ -9,6 +9,10 @@ Open Containerized Desktop Infrastructure (OpenCDI) is a light-weight desktop sa
 * CGroups v2 (cgroups with unified hierarchy)
 * podman or docker with fairly recent version of them.
 
+# License
+
+All content in this repository is licensed under [MIT](LICENSE). For licenses in any applications inside docker images, please check [upstream licenses](UPSTREM_SOURCE).
+
 # Dockerfiles
 
 This is the [OpenCDI](https://github.com/opencdi/opencdi-scripts) application layers repository.
